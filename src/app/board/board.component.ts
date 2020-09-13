@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
-
   squares: any[];
   xIsNext: boolean;
   winner: string;
@@ -32,6 +31,8 @@ export class BoardComponent implements OnInit {
       this.squares.splice(idx, 1, this.player);
       this.xIsNext = !this.xIsNext;
     }
+
+    this.winner = this.calculateWinner();
   }
 
   calculateWinner(): any {
@@ -45,8 +46,8 @@ export class BoardComponent implements OnInit {
       [0, 4, 8],
       [2, 4, 6]
     ];
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
+    for (const line of lines) {
+      const [a, b, c] = line;
       if (
         this.squares[a] &&
         this.squares[a] === this.squares[b] &&
